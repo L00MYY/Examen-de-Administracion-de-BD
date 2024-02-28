@@ -3,7 +3,7 @@ USE db_libro_express;
 
 -- Tabla de clientes
 CREATE TABLE IF NOT EXISTS tb_clientes(
-	id_cliente CHAR(36) PRIMARY KEY,
+	id_cliente BINARY(36) PRIMARY KEY DEFAULT UUID(),
 	nombre_cliente VARCHAR(50) NOT NULL,
 	email_cliente VARCHAR(100) NOT NULL,
 	telefono VARCHAR(10) NOT NULL
@@ -11,8 +11,8 @@ CREATE TABLE IF NOT EXISTS tb_clientes(
 
 -- Tabla de prestamos
 CREATE TABLE IF NOT EXISTS tb_prestamos(
-	id_prestamo CHAR(36) NOT NULL PRIMARY KEY,
-	id_cliente CHAR(50) NOT NULL,
+	id_prestamo BINARY(36) PRIMARY KEY DEFAULT UUID(),
+	id_cliente BINARY(36) NOT NULL,
 	fecha_inicio DATE,
 	fecha_devolucion DATE,
 	estado ENUM('Activo','Inactivo')
@@ -20,24 +20,24 @@ CREATE TABLE IF NOT EXISTS tb_prestamos(
 
 -- Tabla de generos de libros
 CREATE TABLE IF NOT EXISTS tb_generos_libros(
-	id_genero_libro CHAR(36) NOT NULL PRIMARY KEY,
+	id_genero_libro BINARY(36) PRIMARY KEY DEFAULT UUID(),
 	nombre_genero_libro VARCHAR(50)
 );
 
 -- Tabla de libros
 CREATE TABLE IF NOT EXISTS tb_libros(
-	id_libros CHAR(36) NOT NULL PRIMARY KEY,
+	id_libros BINARY(36) PRIMARY KEY DEFAULT UUID(),
 	titulo_libro VARCHAR(50),
 	anio_publicacion INT,
-	id_genero_libro CHAR(36) NOT NULL,
+	id_genero_libro BINARY(36) NOT NULL,
 	estodo ENUM('Disponible','Prestado')
 );
 
 -- tabla de detalles del prestamo
 CREATE TABLE IF NOT EXISTS tb_detalles_prestamos(
-	id_detalle_prestamo CHAR(36) NOT NULL PRIMARY KEY,
-	id_prestamo CHAR(36) NOT NULL,
-	id_libros CHAR(36) NOT NULL
+	id_detalle_prestamo BINARY(36) PRIMARY KEY DEFAULT UUID(),
+	id_prestamo BINARY(36) NOT NULL,
+	id_libros BINARY(36) NOT NULL
 );
 
 -- Renstricciones
