@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS tb_libros(
 	titulo_libro VARCHAR(50),
 	anio_publicacion INT,
 	id_genero_libro BINARY(36) NOT NULL,
-	estodo ENUM('Disponible','Prestado')
+	estado ENUM('Disponible','Prestado')
 );
 
 -- tabla de detalles del prestamo
@@ -61,7 +61,7 @@ CONSTRAINT fk_tb_clientes_tb_prestamos FOREIGN KEY (id_cliente) REFERENCES tb_cl
 -- Check de fechas
 ALTER TABLE tb_prestamos ADD
 CONSTRAINT verificar_fecha
-CHECK (fecha_inicio>fecha_devolucion);
+CHECK (fecha_inicio<fecha_devolucion);
 
 /*tb_generos_libros*/
 -- Unique de telefono
@@ -77,7 +77,7 @@ CONSTRAINT fk_tb_generos_libros_tb_libros FOREIGN KEY (id_genero_libro) REFERENC
 -- Check de anio_publicacion
 ALTER TABLE tb_libros ADD
 CONSTRAINT verificar_anio_publicacion
-CHECK (anio_publicacion<1000);
+CHECK (anio_publicacion>1000);
 
 /*tb_libros*/
 -- Llave Foranea id_prestamo
